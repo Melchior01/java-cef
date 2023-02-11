@@ -2071,3 +2071,17 @@ Java_org_cef_browser_CefBrowser_1N_N_1NotifyMoveOrResizeStarted(JNIEnv* env,
   }
 #endif
 }
+
+JNIEXPORT jint JNICALL
+Java_org_cef_browser_CefBrowser_1N_N_1GetWindowlessFrameRate(JNIEnv* env, jobject obj) {
+  CefRefPtr<CefBrowser> browser = JNI_GET_BROWSER_OR_RETURN(env, obj, -1);
+  return browser->GetHost()->GetWindowlessFrameRate();
+}
+
+JNIEXPORT void JNICALL
+Java_org_cef_browser_CefBrowser_1N_N_1SetWindowlessFrameRate(JNIEnv* env,
+                                                             jobject obj,
+                                                             jint framerate) {
+  CefRefPtr<CefBrowser> browser = JNI_GET_BROWSER_OR_RETURN(env, obj);
+  browser->GetHost()->SetWindowlessFrameRate((int)framerate);
+}

@@ -520,6 +520,25 @@ JNIEXPORT void JNICALL
 Java_org_cef_browser_CefBrowser_1N_N_1NotifyMoveOrResizeStarted(JNIEnv*,
                                                                 jobject);
 
+/*
+ * Class:     org_cef_browser_CefBrowser_N
+ * Method:    N_GetWindowlessFrameRate
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL
+Java_org_cef_browser_CefBrowser_1N_N_1GetWindowlessFrameRate(JNIEnv*,
+                                                             jobject);
+
+/*
+ * Class:     org_cef_browser_CefBrowser_N
+ * Method:    N_SetWindowlessFrameRate
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL
+Java_org_cef_browser_CefBrowser_1N_N_1SetWindowlessFrameRate(JNIEnv*,
+                                                             jobject,
+                                                             jint);
+
 #ifdef __cplusplus
 }
 #endif

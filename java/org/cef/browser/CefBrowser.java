@@ -380,4 +380,16 @@ public interface CefBrowser {
      * @throws UnsupportedOperationException if not supported
      */
     public CompletableFuture<BufferedImage> createScreenshot(boolean nativeResolution);
+
+    /**
+     * Get the windowless max frame rate
+     * @return The max frame rate
+     */
+    public int getWindowlessFrameRate();
+
+    /**
+     * Set the windowless max frame rate
+     * @param framerate The frame rate
+     */
+    public void setWindowlessFrameRate(int framerate);
 }

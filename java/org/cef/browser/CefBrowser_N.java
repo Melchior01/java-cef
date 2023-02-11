@@ -751,6 +751,25 @@ abstract class CefBrowser_N extends CefNativeAdapter implements CefBrowser {
         }
     }
 
+    @Override
+    public final int getWindowlessFrameRate() {
+        try {
+            return N_GetWindowlessFrameRate();
+        } catch (UnsatisfiedLinkError ule) {
+            ule.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public final void setWindowlessFrameRate(int framerate) {
+        try {
+            N_SetWindowlessFrameRate(framerate);
+        } catch (UnsatisfiedLinkError ule) {
+            ule.printStackTrace();
+        }
+    }
+
     private final native boolean N_CreateBrowser(CefClientHandler clientHandler, long windowHandle,
             String url, boolean osr, boolean transparent, Component canvas,
             CefRequestContext context);
@@ -814,4 +833,6 @@ abstract class CefBrowser_N extends CefNativeAdapter implements CefBrowser {
     private final native void N_UpdateUI(Rectangle contentRect, Rectangle browserRect);
     private final native void N_SetParent(long windowHandle, Component canvas);
     private final native void N_NotifyMoveOrResizeStarted();
+    private final native int N_GetWindowlessFrameRate();
+    private final native void N_SetWindowlessFrameRate(int framerate);
 }

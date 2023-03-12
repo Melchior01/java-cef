@@ -648,6 +648,25 @@ abstract class CefBrowser_N extends CefNativeAdapter implements CefBrowser {
     }
 
     /**
+     * Send a key event.
+     * @param type The event type
+     * @param modifiers The modifiers (ALT / CTRL / SHIFT etc)
+     * @param windowsKeyCode Windows key code
+     * @param nativeKeyCode Native key code
+     * @param isSystemKey If this is a system key
+     * @param character The typed character
+     * @param unmodifiedCharacter Unmodified typed character
+     * @param focusOnEditableField If we are focused on a editable field
+     */
+    protected final void sendDirectKeyEvent(int type, int modifiers, int windowsKeyCode, int nativeKeyCode, boolean isSystemKey, char character, char unmodifiedCharacter, boolean focusOnEditableField) {
+        try {
+            N_SendDirectKeyEvent(type, modifiers, windowsKeyCode, nativeKeyCode, isSystemKey, character, unmodifiedCharacter, focusOnEditableField);
+        } catch (UnsatisfiedLinkError ule) {
+            ule.printStackTrace();
+        }
+    }
+
+    /**
      * Send a mouse event.
      * @param e The event to send.
      */
@@ -873,6 +892,7 @@ abstract class CefBrowser_N extends CefNativeAdapter implements CefBrowser {
     private final native void N_WasResized(int width, int height);
     private final native void N_Invalidate();
     private final native void N_SendKeyEvent(KeyEvent e);
+    private final native void N_SendDirectKeyEvent(int type, int modifiers, int windowsKeyCode, int nativeKeyCode, boolean isSystemKey, char character, char unmodifiedCharacter, boolean focusOnEditableField);
     private final native void N_SendMouseEvent(MouseEvent e);
     private final native void N_SendMouseWheelEvent(MouseWheelEvent e);
     private final native void N_DragTargetDragEnter(

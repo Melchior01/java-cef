@@ -1894,6 +1894,30 @@ Java_org_cef_browser_CefBrowser_1N_N_1SendKeyEvent(JNIEnv* env,
 }
 
 JNIEXPORT void JNICALL
+Java_org_cef_browser_CefBrowser_1N_N_1SendDirectKeyEvent(JNIEnv* env,
+                                                         jobject obj,
+                                                         jint type,
+                                                         jint modifiers,
+                                                         jint windows_key_code,
+                                                         jint native_key_code,
+                                                         jboolean is_system_key,
+                                                         jchar character,
+                                                         jchar unmodified_character,
+                                                         jboolean focus_on_editable_field) {
+  CefRefPtr<CefBrowser> browser = JNI_GET_BROWSER_OR_RETURN(env, obj);
+  CefKeyEvent cef_event;
+  cef_event.type = static_cast<cef_key_event_type_t>(type);
+  cef_event.modifiers = modifiers;
+  cef_event.windows_key_code = windows_key_code;
+  cef_event.native_key_code = native_key_code;
+  cef_event.is_system_key = is_system_key != JNI_FALSE ? 1 : 0;
+  cef_event.character = character;
+  cef_event.unmodified_character = unmodified_character;
+  cef_event.focus_on_editable_field = focus_on_editable_field != JNI_FALSE ? 1 : 0;
+  browser->GetHost()->SendKeyEvent(cef_event);
+}
+
+JNIEXPORT void JNICALL
 Java_org_cef_browser_CefBrowser_1N_N_1SendMouseEvent(JNIEnv* env,
                                                      jobject obj,
                                                      jobject mouse_event) {

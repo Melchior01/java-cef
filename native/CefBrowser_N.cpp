@@ -968,6 +968,14 @@ void create(std::shared_ptr<JNIObjectsForCreate> objs,
     }
     windowInfo.SetAsChild(parent, rect);
 #endif
+  } else if(windowHandle != 0) {
+    CefRect rect;
+    CefRefPtr<WindowHandler> windowHandler =
+        (WindowHandler*)clientHandler->GetWindowHandler().get();
+    if (windowHandler.get()) {
+      windowHandler->GetRect(objs->jbrowser, rect);
+    }
+    windowInfo.SetAsChild((CefWindowHandle)windowHandle, rect);
   } else {
     windowInfo.SetAsWindowless((CefWindowHandle)windowHandle);
   }
